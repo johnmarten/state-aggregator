@@ -1,21 +1,15 @@
-require 'csv'
+module StateAggregation
 
-class StateAggregation
+  def self.parse_raw_data(arr_of_arrs)
+    raise ArgumentError unless arr_of_arrs.is_a?(Array)
+    raise ArgumentError unless arr_of_arrs[0].is_a?(Array)
 
-  def parse_raw_data(arr_of_arrs)
-
+    # Slice off the first element since it should contain the headers
+    arr_of_arrs[1..-1].reduce({}) do |hash, arr|
+      checkid = arr[1].to_i
+      hash[checkid] = [] unless hash[checkid]
+      hash[checkid] << arr[0, 3]
+      hash
+    end
   end
-
-end
-
-if ARGV[0]
-  filename = ARGV[0].chomp
-  if File.exist?(filename)
-    state_aggregation = StateAggregation.new
-    state_aggregation.parse_raw_data(CSV.read(filename))
-  else
-    puts 'File cannot be found'
-  end
-else
-  puts 'Usage: ruby state_aggregation.rb <filename>'
 end
