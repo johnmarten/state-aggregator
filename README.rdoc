@@ -1,0 +1,7 @@
+== State Aggregator
+
+* Prerequisites: Ruby 2.1.2, Ruby Gems, Bundler. RVM or similar is nice to have.
+* Before running program for the first time, cd to application directory and write: bundle install
+* To run tests: bundle exec rspec --color
+
+* Usage: ruby app/state_aggregation.rb <filename>
