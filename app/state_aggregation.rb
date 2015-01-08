@@ -14,7 +14,7 @@ module StateAggregation
     arr_of_arrs[1..-1].reduce({}) do |hash, arr|
       checkid       = arr[1].to_i
       hash[checkid] = [] unless hash[checkid]
-      hash[checkid] << arr[0, 3]
+      hash[checkid] << [arr[0], arr[3]]
       hash
     end
   end

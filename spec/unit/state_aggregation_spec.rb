@@ -11,7 +11,7 @@ RSpec.describe StateAggregation do
 
   let(:argument_with_data) do
     array << %w[timestamp checkid responsetime status]
-    array << %w[1367849512 111, 76 UP]
+    array << %w[1367849512 111 76 UP]
     array << %w[1368514766 333 584 UP]
     array << %w[1367612872 111 0 DOWN]
   end
@@ -80,9 +80,9 @@ RSpec.describe StateAggregation do
         check_id_one = first_data_row[1].to_i
         check_id_two = second_data_row[1].to_i
 
-        first_data  = first_data_row[0, 3]
-        second_data = second_data_row[0, 3]
-        third_data  = third_data_row[0, 3]
+        first_data  = first_data_row[0,1] << first_data_row[3]
+        second_data = second_data_row[0,1] << second_data_row[3]
+        third_data  = third_data_row[0,1] << third_data_row[3]
 
         expect(parse_raw_data(argument_with_data)).to eq(
                                                         check_id_one => [first_data, third_data],
