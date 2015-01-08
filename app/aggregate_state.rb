@@ -6,7 +6,7 @@ include StateAggregation
 if ARGV[0]
   filename = ARGV[0].chomp
   if File.exist?(filename)
-    parse_raw_data(CSV.read(filename))
+    sort_on_timestamp(parse_raw_data(CSV.read(filename)))
   else
     puts 'File cannot be found'
   end
